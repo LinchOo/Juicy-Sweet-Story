@@ -9,13 +9,14 @@ import SwiftUI
 
 struct PlayViewModel: View {
     
+    
+    // Setup Lazy V Grid colums
     let colums: [GridItem] = [
         .init(.fixed(85), spacing: 0, alignment: nil),
         .init(.fixed(85), spacing: 0, alignment: nil),
         .init(.fixed(85), spacing: 0, alignment: nil),
         .init(.fixed(85), spacing: 0, alignment: nil)
     ]
-    
     
     // Environment variable
     @Environment (\.presentationMode) var presentation
@@ -49,6 +50,9 @@ struct PlayViewModel: View {
         NavigationView{
             VStack{
                 VStack{
+                    
+// Lazy V Grid section
+                    
                     LazyVGrid(columns: colums,alignment: .center,spacing: 0) {
                         ForEach(0..<imageArray.count, id:\.self){ index in
                             if imageArray.indices.contains(index) {
@@ -61,6 +65,8 @@ struct PlayViewModel: View {
 //                                        Rectangle()
 //                                            .fill(isSelect ? .black.opacity(0.0) : .black.opacity(0.7))
                                     }
+                                
+// Interactions with elements in grid
                                 
                                     .onTapGesture {
                                         if isSelect{
@@ -96,6 +102,9 @@ struct PlayViewModel: View {
                 }
                 .frame(width: UIScreen.main.bounds.width, height: 500, alignment: .center)
                 Spacer()
+                
+// Helper Original Image for game
+                
                 Image(lvlSelected)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -107,6 +116,9 @@ struct PlayViewModel: View {
                     .clipShape(RoundedRectangle(cornerRadius: 45))
                 Spacer()
             }
+            
+// Background and ToolBar section
+            
             .background(
                 Image("backgroundImage")
                     .resizable()
@@ -116,6 +128,9 @@ struct PlayViewModel: View {
                     .toolbar{
                         ToolbarItem(placement: .navigationBarLeading) {
                             HStack{
+                                
+// Backward button -> SelectLevelView
+                                
                                 Button{
                                     self.presentation.wrappedValue.dismiss()
                                     self.isShow = false
@@ -133,6 +148,8 @@ struct PlayViewModel: View {
                                         }
                                 }
                                 .frame(width: 60 ,height: 40)
+                                
+// Restart LvL Button
                                 
                                 Button{
                                     SetTimer()
@@ -157,6 +174,9 @@ struct PlayViewModel: View {
                             }
                             
                         }
+                        
+// LvL ToolTip
+                        
                         ToolbarItem(placement: .navigationBarTrailing) {
                             HStack{
                                 ZStack{
@@ -174,6 +194,9 @@ struct PlayViewModel: View {
                                         .stroke(helper.gradient, lineWidth: 5)
                                 }
                                 .frame(width: 100,height: 35)
+                                
+// Timer section
+                                
                                 ZStack(alignment: .center){
                                     //StrokeTextLabel(text: "\(timeRemaining)", size: 24)
                                     Text(" \(TimerFormater(seconds:timeRemaining)) ")
@@ -218,6 +241,9 @@ struct PlayViewModel: View {
             }
             
         }
+        
+// Overlays Win or loss view panel
+        
         .overlay(content: {
             LevelComplited.opacity(isGameOver ? 1.0 : 0.0 )
             LevelComplited.opacity(isWin ? 1.0 : 0.0)
@@ -228,11 +254,17 @@ struct PlayViewModel: View {
         
         
     }
+    
+// Start Timer Function
+    
     func SetTimer(){
         let newStr = lvlSelected.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
         timeRemaining = 190 - 10*Int(newStr)!
         //timeRemaining = 5
     }
+    
+// Create Puzzle from Image to array of images
+    
     func CreatePuzzle(lvl: String){
         
         let gameImage = UIImage(named: lvl)!.rebuildImage(imagesize: 350, row: 4, col: 4)
@@ -248,7 +280,8 @@ struct PlayViewModel: View {
         imageArrayWin = imageArray
         imageArray.shuffle()
     }
-    
+
+// Level Loss View
     
     var LevelFailed: some View {
         VStack{
@@ -267,8 +300,6 @@ struct PlayViewModel: View {
                         .frame(width: 190, height: 200)
                 }
             }
-            
-           
             .frame(height: 200)
             VStack{
                 ZStack{
@@ -289,6 +320,9 @@ struct PlayViewModel: View {
                 }
             }
             HStack{
+                
+// Backward arrow button -> SelectionLevelView
+                
                 Button{
                     
                     // Navigation forward button
@@ -308,6 +342,9 @@ struct PlayViewModel: View {
                         }
                 }
                 .frame(width: 100 ,height: 100)
+                
+// Restart Level Button
+                
                 Button{
                     
                     // Navigation forward button
@@ -344,6 +381,9 @@ struct PlayViewModel: View {
                 )
             
     }
+    
+// Level Win View
+    
     var LevelComplited: some View {
         VStack{
             Spacer()
@@ -366,6 +406,9 @@ struct PlayViewModel: View {
             .frame(height: 200)
             VStack{
                 ZStack{
+                    
+// Current Time Sctore
+                    
                     //StrokeTextLabel(text: " CURRENT TIME: \(TimerFormater(seconds:timeRemaining)) ", size: 32)
                     Text(" \(TimerFormater(seconds:timeRemaining)) ")
                         .foregroundColor(.pink)
@@ -382,6 +425,9 @@ struct PlayViewModel: View {
                         .stroke(helper.gradient, lineWidth: 5)
                 }
                 ZStack{
+                    
+// Best Time Score this lvl
+                    
                     StrokeTextLabel(text: " BEST TIME: 00:43 ", size: 32)
                     Text(" BEST TIME: 00:43 ")
                         .foregroundColor(.white)
@@ -399,6 +445,9 @@ struct PlayViewModel: View {
                 }
             }
             HStack{
+                
+// Backward Button -> SelectLevelView
+                
                 Button{
                     
                     // Navigation backward button
@@ -418,6 +467,9 @@ struct PlayViewModel: View {
                         }
                 }
                 .frame(width: 60 ,height: 40)
+                
+// Restart LvL button
+                
                 Button{
                     
                     // Reload lvl
@@ -442,6 +494,9 @@ struct PlayViewModel: View {
                         .offset(y:15)
                 }
                 .frame(width: 100  ,height: 100)
+                
+// Forward Button to next LvL
+                
                 Button{
                     //CreatePuzzle(lvl: lvl.lvlArray)
                     //lvl.lvlArray
@@ -475,6 +530,7 @@ struct PlayViewModel: View {
     }
 }
 
+// Extension UIImage for creating puzzle from Image
 
 extension UIImage{
     func rebuildImage(imagesize: CGFloat ,row: CGFloat, col: CGFloat) -> UIImage {

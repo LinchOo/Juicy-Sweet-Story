@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import UIKit
+
+// Loading Screen Emulator
 
 struct LoadingScreenView: View {
     

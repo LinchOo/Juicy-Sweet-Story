@@ -18,6 +18,7 @@ struct PolicyView: View {
     //Helper variable
     @State var helper = HelperModel()
     
+    // Policy Text
     private var policyText = "Copyright reserved by company etc"
     
     var body: some View {

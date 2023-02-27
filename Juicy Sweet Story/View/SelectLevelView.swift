@@ -45,6 +45,7 @@ struct SelectLevelView: View {
     var body: some View {
         NavigationView{
             VStack{
+// Level Grid Section
                     LazyVGrid(columns: colums,alignment: .center,spacing: 13) {
                         ForEach(0..<lvl.lvlArray.count){ index in
                             Image(lvl.lvlArray[index])
@@ -85,6 +86,8 @@ struct SelectLevelView: View {
                                 }
                                 .onTapGesture {
                                     
+// LvL selection Gesture and setup
+                                    
                                     if !lvl.scoreArray.indices.contains(index) {
                                         withAnimation(.spring()) {
                                             isSelected = false
@@ -100,6 +103,9 @@ struct SelectLevelView: View {
                         }
                     }.padding(.top,100)
                 Spacer()
+                
+// Play Button -> PlayViewModel
+                
                 if isSelected{
                     NavigationLink(destination: PlayViewModel(lvlSelected: $lvlSelected)) {
                         Text(" PLAY ")
@@ -119,7 +125,7 @@ struct SelectLevelView: View {
                     
                 }
                 
-                
+// Bakground and ToolBar section
             }
             .background(
                 ZStack{

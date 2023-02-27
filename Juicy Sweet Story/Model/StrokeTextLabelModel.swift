@@ -1,6 +1,9 @@
 
 import SwiftUI
 
+// Stroke emulator for Text
+
+
 struct StrokeTextLabel: UIViewRepresentable {
     var text: String
     var size: CGFloat
@@ -24,7 +27,6 @@ struct StrokeTextLabel: UIViewRepresentable {
             ]
         )
         
-		let labelFrame = CGRect(x: 0, y: 0, width: 100, height: 50)
         strokeLabel.attributedText = attributedString
 		strokeLabel.numberOfLines = 2
         strokeLabel.backgroundColor = UIColor.clear

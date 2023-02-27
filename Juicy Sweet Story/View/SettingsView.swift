@@ -51,8 +51,10 @@ struct SettingsView: View {
                         
 //   Sound Button -> On / oFF Sound  //
                         Button{
+                            
                             // Setup sound on/off
                             sound.toggle()
+                            
                         }label: {
                             Image(systemName: sound ? "checkmark" : "xmark")
                                 .resizable()
@@ -90,8 +92,10 @@ struct SettingsView: View {
 //   Sound Button -> On / oFF Sound  //
                         
                         Button{
+                            
                             // Setup vibro on/off
                             vibro.toggle()
+                            
                         }label: {
                             Image(systemName: vibro ? "checkmark" : "xmark")
                                 .resizable()
@@ -114,7 +118,9 @@ struct SettingsView: View {
                 
                 if isShow3{
                     Button{
+                        
                         requestReview()
+                        
                     }label: {
                         Text(" RATE US ")
                             .foregroundColor(.white)

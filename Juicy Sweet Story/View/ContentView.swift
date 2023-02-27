@@ -11,6 +11,8 @@ import CoreData
 struct ContentView: View {
     //Environment variables
     @Environment(\.managedObjectContext) private var viewContext
+    
+    // Work with Core Data
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
@@ -153,6 +155,7 @@ struct ContentView: View {
         }
         
 // OnAppear Loading Screen -> Start Animation
+        
         .onAppear {
             // Fetch from DB Score Results
             // Fetch from BD Settings

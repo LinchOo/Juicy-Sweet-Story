@@ -46,6 +46,9 @@ struct RulesView: View {
                         .transition(.offset(x:1000))
                 }
             }
+            
+// Animation Setup
+            
             .onAppear{
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     withAnimation(.spring()) {
@@ -53,7 +56,9 @@ struct RulesView: View {
                     }
                 }
             }
-
+            
+// Background and ToolBar 
+            
             .background(
                 ZStack{
                     Image("backgroundImage")
