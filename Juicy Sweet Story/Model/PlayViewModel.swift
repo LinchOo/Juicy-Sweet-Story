@@ -245,7 +245,7 @@ struct PlayViewModel: View {
 // Overlays Win or loss view panel
         
         .overlay(content: {
-            LevelComplited.opacity(isGameOver ? 1.0 : 0.0 )
+            LevelFailed.opacity(isGameOver ? 1.0 : 0.0 )
             LevelComplited.opacity(isWin ? 1.0 : 0.0)
             
         })
